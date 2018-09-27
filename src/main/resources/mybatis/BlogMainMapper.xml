@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimoxiamu.blogback.dao.BlogMainMapper">
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_title_img" jdbcType="VARCHAR" property="blogTitleImg" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="blog_auth" jdbcType="VARCHAR" property="blogAuth" />
+    <result column="blog_description" jdbcType="VARCHAR" property="blogDescription" />
+    <result column="blog_info_url" jdbcType="VARCHAR" property="blogInfoUrl" />
+    <result column="blog_uuid" jdbcType="VARCHAR" property="blogUuid" />
+    <result column="next_blog_uuid" jdbcType="VARCHAR" property="nextBlogUuid" />
+    <result column="next_blog_title" jdbcType="VARCHAR" property="nextBlogTitle" />
+    <result column="last_blog_uuid" jdbcType="VARCHAR" property="lastBlogUuid" />
+    <result column="last_blog_title" jdbcType="VARCHAR" property="lastBlogTitle" />
+    <result column="blog_status" jdbcType="VARCHAR" property="blogStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_id, blog_title, blog_title_img, insert_time, update_time, read_count, like_count, 
+    blog_auth, blog_description, blog_info_url, blog_uuid, next_blog_uuid, next_blog_title, 
+    last_blog_uuid, last_blog_title, blog_status
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main (type_id, blog_title, blog_title_img, 
+      insert_time, update_time, read_count, 
+      like_count, blog_auth, blog_description, 
+      blog_info_url, blog_uuid, next_blog_uuid, 
+      next_blog_title, last_blog_uuid, last_blog_title, 
+      blog_status, blog_text)
+    values (#{typeId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogTitleImg,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{readCount,jdbcType=INTEGER}, 
+      #{likeCount,jdbcType=INTEGER}, #{blogAuth,jdbcType=VARCHAR}, #{blogDescription,jdbcType=VARCHAR}, 
+      #{blogInfoUrl,jdbcType=VARCHAR}, #{blogUuid,jdbcType=VARCHAR}, #{nextBlogUuid,jdbcType=VARCHAR}, 
+      #{nextBlogTitle,jdbcType=VARCHAR}, #{lastBlogUuid,jdbcType=VARCHAR}, #{lastBlogTitle,jdbcType=VARCHAR}, 
+      #{blogStatus,jdbcType=VARCHAR}, #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="blogAuth != null">
+        blog_auth,
+      </if>
+      <if test="blogDescription != null">
+        blog_description,
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url,
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid,
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid,
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title,
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid,
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title,
+      </if>
+      <if test="blogStatus != null">
+        blog_status,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        blog_description = #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        blog_status = #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_title_img" jdbcType="VARCHAR" property="blogTitleImg" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="blog_auth" jdbcType="VARCHAR" property="blogAuth" />
+    <result column="blog_description" jdbcType="VARCHAR" property="blogDescription" />
+    <result column="blog_info_url" jdbcType="VARCHAR" property="blogInfoUrl" />
+    <result column="blog_uuid" jdbcType="VARCHAR" property="blogUuid" />
+    <result column="next_blog_uuid" jdbcType="VARCHAR" property="nextBlogUuid" />
+    <result column="next_blog_title" jdbcType="VARCHAR" property="nextBlogTitle" />
+    <result column="last_blog_uuid" jdbcType="VARCHAR" property="lastBlogUuid" />
+    <result column="last_blog_title" jdbcType="VARCHAR" property="lastBlogTitle" />
+    <result column="blog_status" jdbcType="VARCHAR" property="blogStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_id, blog_title, blog_title_img, insert_time, update_time, read_count, like_count, 
+    blog_auth, blog_description, blog_info_url, blog_uuid, next_blog_uuid, next_blog_title, 
+    last_blog_uuid, last_blog_title, blog_status
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main (type_id, blog_title, blog_title_img, 
+      insert_time, update_time, read_count, 
+      like_count, blog_auth, blog_description, 
+      blog_info_url, blog_uuid, next_blog_uuid, 
+      next_blog_title, last_blog_uuid, last_blog_title, 
+      blog_status, blog_text)
+    values (#{typeId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogTitleImg,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{readCount,jdbcType=INTEGER}, 
+      #{likeCount,jdbcType=INTEGER}, #{blogAuth,jdbcType=VARCHAR}, #{blogDescription,jdbcType=VARCHAR}, 
+      #{blogInfoUrl,jdbcType=VARCHAR}, #{blogUuid,jdbcType=VARCHAR}, #{nextBlogUuid,jdbcType=VARCHAR}, 
+      #{nextBlogTitle,jdbcType=VARCHAR}, #{lastBlogUuid,jdbcType=VARCHAR}, #{lastBlogTitle,jdbcType=VARCHAR}, 
+      #{blogStatus,jdbcType=VARCHAR}, #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="blogAuth != null">
+        blog_auth,
+      </if>
+      <if test="blogDescription != null">
+        blog_description,
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url,
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid,
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid,
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title,
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid,
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title,
+      </if>
+      <if test="blogStatus != null">
+        blog_status,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        blog_description = #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        blog_status = #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_title_img" jdbcType="VARCHAR" property="blogTitleImg" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="blog_auth" jdbcType="VARCHAR" property="blogAuth" />
+    <result column="blog_description" jdbcType="VARCHAR" property="blogDescription" />
+    <result column="blog_info_url" jdbcType="VARCHAR" property="blogInfoUrl" />
+    <result column="blog_uuid" jdbcType="VARCHAR" property="blogUuid" />
+    <result column="next_blog_uuid" jdbcType="VARCHAR" property="nextBlogUuid" />
+    <result column="next_blog_title" jdbcType="VARCHAR" property="nextBlogTitle" />
+    <result column="last_blog_uuid" jdbcType="VARCHAR" property="lastBlogUuid" />
+    <result column="last_blog_title" jdbcType="VARCHAR" property="lastBlogTitle" />
+    <result column="blog_status" jdbcType="VARCHAR" property="blogStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_id, blog_title, blog_title_img, insert_time, update_time, read_count, like_count, 
+    blog_auth, blog_description, blog_info_url, blog_uuid, next_blog_uuid, next_blog_title, 
+    last_blog_uuid, last_blog_title, blog_status
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main (type_id, blog_title, blog_title_img, 
+      insert_time, update_time, read_count, 
+      like_count, blog_auth, blog_description, 
+      blog_info_url, blog_uuid, next_blog_uuid, 
+      next_blog_title, last_blog_uuid, last_blog_title, 
+      blog_status, blog_text)
+    values (#{typeId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogTitleImg,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{readCount,jdbcType=INTEGER}, 
+      #{likeCount,jdbcType=INTEGER}, #{blogAuth,jdbcType=VARCHAR}, #{blogDescription,jdbcType=VARCHAR}, 
+      #{blogInfoUrl,jdbcType=VARCHAR}, #{blogUuid,jdbcType=VARCHAR}, #{nextBlogUuid,jdbcType=VARCHAR}, 
+      #{nextBlogTitle,jdbcType=VARCHAR}, #{lastBlogUuid,jdbcType=VARCHAR}, #{lastBlogTitle,jdbcType=VARCHAR}, 
+      #{blogStatus,jdbcType=VARCHAR}, #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="blogAuth != null">
+        blog_auth,
+      </if>
+      <if test="blogDescription != null">
+        blog_description,
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url,
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid,
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid,
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title,
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid,
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title,
+      </if>
+      <if test="blogStatus != null">
+        blog_status,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        blog_description = #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        blog_status = #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_title_img" jdbcType="VARCHAR" property="blogTitleImg" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="blog_auth" jdbcType="VARCHAR" property="blogAuth" />
+    <result column="blog_description" jdbcType="VARCHAR" property="blogDescription" />
+    <result column="blog_info_url" jdbcType="VARCHAR" property="blogInfoUrl" />
+    <result column="blog_uuid" jdbcType="VARCHAR" property="blogUuid" />
+    <result column="next_blog_uuid" jdbcType="VARCHAR" property="nextBlogUuid" />
+    <result column="next_blog_title" jdbcType="VARCHAR" property="nextBlogTitle" />
+    <result column="last_blog_uuid" jdbcType="VARCHAR" property="lastBlogUuid" />
+    <result column="last_blog_title" jdbcType="VARCHAR" property="lastBlogTitle" />
+    <result column="blog_status" jdbcType="VARCHAR" property="blogStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_id, blog_title, blog_title_img, insert_time, update_time, read_count, like_count, 
+    blog_auth, blog_description, blog_info_url, blog_uuid, next_blog_uuid, next_blog_title, 
+    last_blog_uuid, last_blog_title, blog_status
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main (type_id, blog_title, blog_title_img, 
+      insert_time, update_time, read_count, 
+      like_count, blog_auth, blog_description, 
+      blog_info_url, blog_uuid, next_blog_uuid, 
+      next_blog_title, last_blog_uuid, last_blog_title, 
+      blog_status, blog_text)
+    values (#{typeId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogTitleImg,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{readCount,jdbcType=INTEGER}, 
+      #{likeCount,jdbcType=INTEGER}, #{blogAuth,jdbcType=VARCHAR}, #{blogDescription,jdbcType=VARCHAR}, 
+      #{blogInfoUrl,jdbcType=VARCHAR}, #{blogUuid,jdbcType=VARCHAR}, #{nextBlogUuid,jdbcType=VARCHAR}, 
+      #{nextBlogTitle,jdbcType=VARCHAR}, #{lastBlogUuid,jdbcType=VARCHAR}, #{lastBlogTitle,jdbcType=VARCHAR}, 
+      #{blogStatus,jdbcType=VARCHAR}, #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="blogAuth != null">
+        blog_auth,
+      </if>
+      <if test="blogDescription != null">
+        blog_description,
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url,
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid,
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid,
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title,
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid,
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title,
+      </if>
+      <if test="blogStatus != null">
+        blog_status,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        blog_description = #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        blog_status = #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_title_img" jdbcType="VARCHAR" property="blogTitleImg" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="blog_auth" jdbcType="VARCHAR" property="blogAuth" />
+    <result column="blog_description" jdbcType="VARCHAR" property="blogDescription" />
+    <result column="blog_info_url" jdbcType="VARCHAR" property="blogInfoUrl" />
+    <result column="blog_uuid" jdbcType="VARCHAR" property="blogUuid" />
+    <result column="next_blog_uuid" jdbcType="VARCHAR" property="nextBlogUuid" />
+    <result column="next_blog_title" jdbcType="VARCHAR" property="nextBlogTitle" />
+    <result column="last_blog_uuid" jdbcType="VARCHAR" property="lastBlogUuid" />
+    <result column="last_blog_title" jdbcType="VARCHAR" property="lastBlogTitle" />
+    <result column="blog_status" jdbcType="VARCHAR" property="blogStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blogText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_id, blog_title, blog_title_img, insert_time, update_time, read_count, like_count, 
+    blog_auth, blog_description, blog_info_url, blog_uuid, next_blog_uuid, next_blog_title, 
+    last_blog_uuid, last_blog_title, blog_status
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main (type_id, blog_title, blog_title_img, 
+      insert_time, update_time, read_count, 
+      like_count, blog_auth, blog_description, 
+      blog_info_url, blog_uuid, next_blog_uuid, 
+      next_blog_title, last_blog_uuid, last_blog_title, 
+      blog_status, blog_text)
+    values (#{typeId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogTitleImg,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{readCount,jdbcType=INTEGER}, 
+      #{likeCount,jdbcType=INTEGER}, #{blogAuth,jdbcType=VARCHAR}, #{blogDescription,jdbcType=VARCHAR}, 
+      #{blogInfoUrl,jdbcType=VARCHAR}, #{blogUuid,jdbcType=VARCHAR}, #{nextBlogUuid,jdbcType=VARCHAR}, 
+      #{nextBlogTitle,jdbcType=VARCHAR}, #{lastBlogUuid,jdbcType=VARCHAR}, #{lastBlogTitle,jdbcType=VARCHAR}, 
+      #{blogStatus,jdbcType=VARCHAR}, #{blogText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blog_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="blogAuth != null">
+        blog_auth,
+      </if>
+      <if test="blogDescription != null">
+        blog_description,
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url,
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid,
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid,
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title,
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid,
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title,
+      </if>
+      <if test="blogStatus != null">
+        blog_status,
+      </if>
+      <if test="blogText != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTitleImg != null">
+        blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="blogAuth != null">
+        blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogDescription != null">
+        blog_description = #{blogDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="blogInfoUrl != null">
+        blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUuid != null">
+        blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogUuid != null">
+        next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBlogTitle != null">
+        next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogUuid != null">
+        last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBlogTitle != null">
+        last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogStatus != null">
+        blog_status = #{blogStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="blogText != null">
+        blog_text = #{blogText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR},
+      blog_text = #{blogText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set type_id = #{typeId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_title_img = #{blogTitleImg,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      blog_auth = #{blogAuth,jdbcType=VARCHAR},
+      blog_description = #{blogDescription,jdbcType=VARCHAR},
+      blog_info_url = #{blogInfoUrl,jdbcType=VARCHAR},
+      blog_uuid = #{blogUuid,jdbcType=VARCHAR},
+      next_blog_uuid = #{nextBlogUuid,jdbcType=VARCHAR},
+      next_blog_title = #{nextBlogTitle,jdbcType=VARCHAR},
+      last_blog_uuid = #{lastBlogUuid,jdbcType=VARCHAR},
+      last_blog_title = #{lastBlogTitle,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
