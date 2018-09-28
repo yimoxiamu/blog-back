@@ -1,4 +1,4 @@
-package com.yimoxiamu.blogback.constant;
+package com.yimoxiamu.blogback.tools;
 
 /**
  * @ClassName CodeMsg

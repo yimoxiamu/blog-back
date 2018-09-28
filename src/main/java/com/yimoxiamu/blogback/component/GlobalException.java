@@ -1,7 +1,7 @@
 package com.yimoxiamu.blogback.component;
 
-import com.yimoxiamu.blogback.constant.CodeMsg;
-import com.yimoxiamu.blogback.constant.Result;
+import com.yimoxiamu.blogback.tools.CodeMsg;
+import com.yimoxiamu.blogback.tools.Result;
 import factory.Log;
 import factory.LogFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

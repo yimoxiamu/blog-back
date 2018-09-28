@@ -1,6 +1,6 @@
 package com.yimoxiamu.blogback.component;
 
-import com.yimoxiamu.blogback.constant.CodeMsg;
+import com.yimoxiamu.blogback.tools.CodeMsg;
 
 /**
  * @ClassName CustomGolbalException

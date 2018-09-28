@@ -52,9 +52,38 @@
         <dependency>
             <groupId>com.yimoxiamu</groupId>
             <artifactId>log</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.3</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profileActive>test</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -90,6 +119,24 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>application-*.properties</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>application-${profileActive}.properties</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 

@@ -1,6 +1,6 @@
 package com.yimoxiamu.blogback.entity;
 
-public class TType {
+public class BlogType {
     private Integer id;
 
     private String blogType;
