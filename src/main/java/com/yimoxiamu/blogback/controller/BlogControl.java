@@ -10,6 +10,7 @@ import factory.Log;
 import factory.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,19 +30,15 @@ public class BlogControl {
 
     @Autowired
     private BlogService blogService;
-    @Autowired(required = false)
-    private BlogMainMapper blogMainMapper;
 
-    @GetMapping(value = "/blogList")
-    public Result<PageBean> blogList(){
-        return blogService.blogList(1,3);
+    @PostMapping(value = "/blogList")
+    public Result<PageBean> blogList(int pageNum,int pageSize){
+        return blogService.blogList(pageNum,pageSize);
     }
 
-    @GetMapping(value = "test")
-    public String test(){
-        BlogMain blogMain = blogMainMapper.selectByPrimaryKey(1);
-        log.info(blogMain);
-        return "ok";
+    @PostMapping(value = "/addLike")
+    public Result<String> blogLike(String uuid , int likeCount){
+        return blogService.addLike(uuid,likeCount);
     }
 
 }

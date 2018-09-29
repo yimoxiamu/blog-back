@@ -177,11 +177,18 @@
 	bm.blog_title,
 	bm.blog_description,
 	bm.blog_auth,
-	bt.blog_type
+	bm.read_count,
+	bm.like_count,
+	bt.blog_type,
+	bm.blog_uuid,
+	DATE_FORMAT(bm.insert_time,'%Y-%m-%d') as insert_time
     FROM
         blog_main bm
     LEFT JOIN blog_type bt on bm.type_id = bt.id
   </select>
+  <update id="addLikeCount" parameterType="java.lang.String">
+    update blog_main set like_count = #{likeCount} where blog_uuid = #{uuid}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
     update blog_main
     <set>

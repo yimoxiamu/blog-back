@@ -12,7 +12,11 @@ public class CodeMsg {
     private int code;
     private String message;
 
+    //通用异常类型
     public static CodeMsg SERVER_ERROR=new CodeMsg(10010,"服务器异常");
+    //文章阅读，点赞人数
+    public static CodeMsg ADD_LIKE_ERROR=new CodeMsg(20010,"增加点赞人数发生错误");
+
 
     public int getCode() {
         return code;
