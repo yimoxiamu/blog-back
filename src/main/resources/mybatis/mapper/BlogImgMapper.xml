@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimoxiamu.blogback.dao.BlogImgMapper">
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogImg">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="blog_id" jdbcType="INTEGER" property="blog_id" />
+    <result column="img_url" jdbcType="VARCHAR" property="img_url" />
+    <result column="img_desc" jdbcType="VARCHAR" property="img_desc" />
+    <result column="img_type" jdbcType="INTEGER" property="img_type" />
+    <result column="delflag" jdbcType="VARCHAR" property="delflag" />
+    <result column="del_date" jdbcType="TIMESTAMP" property="del_date" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, blog_id, img_url, img_desc, img_type, delflag, del_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_img
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_img
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogImg">
+    insert into blog_img (id, blog_id, img_url, 
+      img_desc, img_type, delflag, 
+      del_date)
+    values (#{id,jdbcType=INTEGER}, #{blog_id,jdbcType=INTEGER}, #{img_url,jdbcType=VARCHAR}, 
+      #{img_desc,jdbcType=VARCHAR}, #{img_type,jdbcType=INTEGER}, #{delflag,jdbcType=VARCHAR}, 
+      #{del_date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogImg">
+    insert into blog_img
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="blog_id != null">
+        blog_id,
+      </if>
+      <if test="img_url != null">
+        img_url,
+      </if>
+      <if test="img_desc != null">
+        img_desc,
+      </if>
+      <if test="img_type != null">
+        img_type,
+      </if>
+      <if test="delflag != null">
+        delflag,
+      </if>
+      <if test="del_date != null">
+        del_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="blog_id != null">
+        #{blog_id,jdbcType=INTEGER},
+      </if>
+      <if test="img_url != null">
+        #{img_url,jdbcType=VARCHAR},
+      </if>
+      <if test="img_desc != null">
+        #{img_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="img_type != null">
+        #{img_type,jdbcType=INTEGER},
+      </if>
+      <if test="delflag != null">
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="del_date != null">
+        #{del_date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogImg">
+    update blog_img
+    <set>
+      <if test="blog_id != null">
+        blog_id = #{blog_id,jdbcType=INTEGER},
+      </if>
+      <if test="img_url != null">
+        img_url = #{img_url,jdbcType=VARCHAR},
+      </if>
+      <if test="img_desc != null">
+        img_desc = #{img_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="img_type != null">
+        img_type = #{img_type,jdbcType=INTEGER},
+      </if>
+      <if test="delflag != null">
+        delflag = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="del_date != null">
+        del_date = #{del_date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogImg">
+    update blog_img
+    set blog_id = #{blog_id,jdbcType=INTEGER},
+      img_url = #{img_url,jdbcType=VARCHAR},
+      img_desc = #{img_desc,jdbcType=VARCHAR},
+      img_type = #{img_type,jdbcType=INTEGER},
+      delflag = #{delflag,jdbcType=VARCHAR},
+      del_date = #{del_date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

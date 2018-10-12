@@ -1,7 +1,6 @@
 package com.yimoxiamu.blogback.dao;
 
 import com.yimoxiamu.blogback.entity.BlogMain;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,9 @@ public interface BlogMainMapper {
 
     int updateByPrimaryKey(BlogMain record);
 
+    /**
+     * 获取文章列表
+     * @return
+     */
     List<Map<String,Object>> blogList();
-
-    int addLikeCount(@Param(value = "uuid") String uuid,@Param(value = "likeCount") int LikeCount);
 }

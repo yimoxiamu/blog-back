@@ -35,17 +35,17 @@ public class BlogServiceImpl implements BlogService {
 
 
     @Override
-    public Result<PageBean> blogList(int pageNum, int pageSize) {
+    public Result<PageBean> getBlogList(int pageNum, int pageSize) {
         PageBean<Map<String,Object>> pageBean=PageBean.setUp(pageNum,pageSize).doSelect(() -> { blogMainMapper.blogList(); });
         return Result.success(pageBean);
     }
 
     @Override
     public Result<String> addLike(String uuid,int likeCount) {
-        int i = blogMainMapper.addLikeCount(uuid,likeCount);
-        if(i != 1){
-            return Result.error(CodeMsg.ADD_LIKE_ERROR);
-        }
+//        int i = blogMainMapper.addLikeCount(uuid,likeCount);
+//        if(i != 1){
+//            return Result.error(CodeMsg.ADD_LIKE_ERROR);
+//        }
         return Result.success("ok");
     }
 }

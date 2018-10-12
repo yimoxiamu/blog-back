@@ -11,7 +11,7 @@ public interface BlogService {
      * @param pageSize
      * @return
      */
-    Result<PageBean> blogList(int pageNum, int pageSize);
+    Result<PageBean> getBlogList(int pageNum, int pageSize);
 
     /**
      * 增加对应文章喜欢人数

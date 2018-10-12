@@ -9,10 +9,7 @@ import com.yimoxiamu.blogback.tools.Result;
 import factory.Log;
 import factory.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName BlogControl
@@ -31,9 +28,9 @@ public class BlogControl {
     @Autowired
     private BlogService blogService;
 
-    @PostMapping(value = "/blogList")
-    public Result<PageBean> blogList(int pageNum,int pageSize){
-        return blogService.blogList(pageNum,pageSize);
+    @GetMapping(value = "/blogList/{pageNum}/{pageSize}")
+    public Result<PageBean> blogList(@PathVariable int pageNum,@PathVariable int pageSize){
+        return blogService.getBlogList(pageNum,pageSize);
     }
 
     @PostMapping(value = "/addLike")

@@ -3,11 +3,13 @@
 <mapper namespace="com.yimoxiamu.blogback.dao.BlogTypeMapper">
   <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogType">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="blog_type" jdbcType="VARCHAR" property="blogType" />
+    <result column="blog_type" jdbcType="VARCHAR" property="blog_type" />
     <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="delflag" jdbcType="VARCHAR" property="delflag" />
+    <result column="del_date" jdbcType="TIMESTAMP" property="del_date" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, blog_type, count
+    id, blog_type, count, delflag, del_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -20,50 +22,72 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogType">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into blog_type (blog_type, count)
-    values (#{blogType,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER})
+    insert into blog_type (id, blog_type, count, 
+      delflag, del_date)
+    values (#{id,jdbcType=INTEGER}, #{blog_type,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{delflag,jdbcType=VARCHAR}, #{del_date,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogType">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into blog_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="blogType != null">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="blog_type != null">
         blog_type,
       </if>
       <if test="count != null">
         count,
       </if>
+      <if test="delflag != null">
+        delflag,
+      </if>
+      <if test="del_date != null">
+        del_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="blogType != null">
-        #{blogType,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="blog_type != null">
+        #{blog_type,jdbcType=VARCHAR},
       </if>
       <if test="count != null">
         #{count,jdbcType=INTEGER},
+      </if>
+      <if test="delflag != null">
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="del_date != null">
+        #{del_date,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogType">
     update blog_type
     <set>
-      <if test="blogType != null">
-        blog_type = #{blogType,jdbcType=VARCHAR},
+      <if test="blog_type != null">
+        blog_type = #{blog_type,jdbcType=VARCHAR},
       </if>
       <if test="count != null">
         count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="delflag != null">
+        delflag = #{delflag,jdbcType=VARCHAR},
+      </if>
+      <if test="del_date != null">
+        del_date = #{del_date,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogType">
     update blog_type
-    set blog_type = #{blogType,jdbcType=VARCHAR},
-      count = #{count,jdbcType=INTEGER}
+    set blog_type = #{blog_type,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      delflag = #{delflag,jdbcType=VARCHAR},
+      del_date = #{del_date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

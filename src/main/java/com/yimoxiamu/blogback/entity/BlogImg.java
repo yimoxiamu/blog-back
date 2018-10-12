@@ -1,15 +1,21 @@
 package com.yimoxiamu.blogback.entity;
 
+import java.util.Date;
+
 public class BlogImg {
     private Integer id;
 
-    private Integer blogId;
+    private Integer blog_id;
 
-    private String imgUrl;
+    private String img_url;
 
-    private String imgDesc;
+    private String img_desc;
 
-    private Integer imgType;
+    private Integer img_type;
+
+    private String delflag;
+
+    private Date del_date;
 
     public Integer getId() {
         return id;
@@ -19,35 +25,51 @@ public class BlogImg {
         this.id = id;
     }
 
-    public Integer getBlogId() {
-        return blogId;
+    public Integer getBlog_id() {
+        return blog_id;
     }
 
-    public void setBlogId(Integer blogId) {
-        this.blogId = blogId;
+    public void setBlog_id(Integer blog_id) {
+        this.blog_id = blog_id;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
-    public String getImgDesc() {
-        return imgDesc;
+    public String getImg_desc() {
+        return img_desc;
     }
 
-    public void setImgDesc(String imgDesc) {
-        this.imgDesc = imgDesc == null ? null : imgDesc.trim();
+    public void setImg_desc(String img_desc) {
+        this.img_desc = img_desc;
     }
 
-    public Integer getImgType() {
-        return imgType;
+    public Integer getImg_type() {
+        return img_type;
     }
 
-    public void setImgType(Integer imgType) {
-        this.imgType = imgType;
+    public void setImg_type(Integer img_type) {
+        this.img_type = img_type;
+    }
+
+    public String getDelflag() {
+        return delflag;
+    }
+
+    public void setDelflag(String delflag) {
+        this.delflag = delflag;
+    }
+
+    public Date getDel_date() {
+        return del_date;
+    }
+
+    public void setDel_date(Date del_date) {
+        this.del_date = del_date;
     }
 }

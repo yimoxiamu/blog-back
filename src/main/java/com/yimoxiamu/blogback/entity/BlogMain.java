@@ -5,39 +5,35 @@ import java.util.Date;
 public class BlogMain {
     private Integer id;
 
-    private Integer typeId;
+    private String blog_uuid;
 
-    private String blogTitle;
+    private Integer type_id;
 
-    private String blogTitleImg;
+    private String blog_title;
 
-    private Date insertTime;
+    private String blog_description;
 
-    private Date updateTime;
+    private Integer comment_id;
 
-    private Integer readCount;
+    private Integer read_count;
 
-    private Integer likeCount;
+    private Integer like_count;
 
-    private String blogAuth;
+    private String blog_status;
 
-    private String blogDescription;
+    private Integer create_by;
 
-    private String blogInfoUrl;
+    private Date create_time;
 
-    private String blogUuid;
+    private Integer update_by;
 
-    private String nextBlogUuid;
+    private Date update_time;
 
-    private String nextBlogTitle;
+    private String delfalg;
 
-    private String lastBlogUuid;
+    private Date del_date;
 
-    private String lastBlogTitle;
-
-    private String blogStatus;
-
-    private String blogText;
+    private String blog_text;
 
     public Integer getId() {
         return id;
@@ -47,139 +43,123 @@ public class BlogMain {
         this.id = id;
     }
 
-    public Integer getTypeId() {
-        return typeId;
+    public String getBlog_uuid() {
+        return blog_uuid;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setBlog_uuid(String blog_uuid) {
+        this.blog_uuid = blog_uuid;
     }
 
-    public String getBlogTitle() {
-        return blogTitle;
+    public Integer getType_id() {
+        return type_id;
     }
 
-    public void setBlogTitle(String blogTitle) {
-        this.blogTitle = blogTitle == null ? null : blogTitle.trim();
+    public void setType_id(Integer type_id) {
+        this.type_id = type_id;
     }
 
-    public String getBlogTitleImg() {
-        return blogTitleImg;
+    public String getBlog_title() {
+        return blog_title;
     }
 
-    public void setBlogTitleImg(String blogTitleImg) {
-        this.blogTitleImg = blogTitleImg == null ? null : blogTitleImg.trim();
+    public void setBlog_title(String blog_title) {
+        this.blog_title = blog_title;
     }
 
-    public Date getInsertTime() {
-        return insertTime;
+    public String getBlog_description() {
+        return blog_description;
     }
 
-    public void setInsertTime(Date insertTime) {
-        this.insertTime = insertTime;
+    public void setBlog_description(String blog_description) {
+        this.blog_description = blog_description;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Integer getComment_id() {
+        return comment_id;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setComment_id(Integer comment_id) {
+        this.comment_id = comment_id;
     }
 
-    public Integer getReadCount() {
-        return readCount;
+    public Integer getRead_count() {
+        return read_count;
     }
 
-    public void setReadCount(Integer readCount) {
-        this.readCount = readCount;
+    public void setRead_count(Integer read_count) {
+        this.read_count = read_count;
     }
 
-    public Integer getLikeCount() {
-        return likeCount;
+    public Integer getLike_count() {
+        return like_count;
     }
 
-    public void setLikeCount(Integer likeCount) {
-        this.likeCount = likeCount;
+    public void setLike_count(Integer like_count) {
+        this.like_count = like_count;
     }
 
-    public String getBlogAuth() {
-        return blogAuth;
+    public String getBlog_status() {
+        return blog_status;
     }
 
-    public void setBlogAuth(String blogAuth) {
-        this.blogAuth = blogAuth == null ? null : blogAuth.trim();
+    public void setBlog_status(String blog_status) {
+        this.blog_status = blog_status;
     }
 
-    public String getBlogDescription() {
-        return blogDescription;
+    public Integer getCreate_by() {
+        return create_by;
     }
 
-    public void setBlogDescription(String blogDescription) {
-        this.blogDescription = blogDescription == null ? null : blogDescription.trim();
+    public void setCreate_by(Integer create_by) {
+        this.create_by = create_by;
     }
 
-    public String getBlogInfoUrl() {
-        return blogInfoUrl;
+    public Date getCreate_time() {
+        return create_time;
     }
 
-    public void setBlogInfoUrl(String blogInfoUrl) {
-        this.blogInfoUrl = blogInfoUrl == null ? null : blogInfoUrl.trim();
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
     }
 
-    public String getBlogUuid() {
-        return blogUuid;
+    public Integer getUpdate_by() {
+        return update_by;
     }
 
-    public void setBlogUuid(String blogUuid) {
-        this.blogUuid = blogUuid == null ? null : blogUuid.trim();
+    public void setUpdate_by(Integer update_by) {
+        this.update_by = update_by;
     }
 
-    public String getNextBlogUuid() {
-        return nextBlogUuid;
+    public Date getUpdate_time() {
+        return update_time;
     }
 
-    public void setNextBlogUuid(String nextBlogUuid) {
-        this.nextBlogUuid = nextBlogUuid == null ? null : nextBlogUuid.trim();
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
     }
 
-    public String getNextBlogTitle() {
-        return nextBlogTitle;
+    public String getDelfalg() {
+        return delfalg;
     }
 
-    public void setNextBlogTitle(String nextBlogTitle) {
-        this.nextBlogTitle = nextBlogTitle == null ? null : nextBlogTitle.trim();
+    public void setDelfalg(String delfalg) {
+        this.delfalg = delfalg;
     }
 
-    public String getLastBlogUuid() {
-        return lastBlogUuid;
+    public Date getDel_date() {
+        return del_date;
     }
 
-    public void setLastBlogUuid(String lastBlogUuid) {
-        this.lastBlogUuid = lastBlogUuid == null ? null : lastBlogUuid.trim();
+    public void setDel_date(Date del_date) {
+        this.del_date = del_date;
     }
 
-    public String getLastBlogTitle() {
-        return lastBlogTitle;
+    public String getBlog_text() {
+        return blog_text;
     }
 
-    public void setLastBlogTitle(String lastBlogTitle) {
-        this.lastBlogTitle = lastBlogTitle == null ? null : lastBlogTitle.trim();
-    }
-
-    public String getBlogStatus() {
-        return blogStatus;
-    }
-
-    public void setBlogStatus(String blogStatus) {
-        this.blogStatus = blogStatus == null ? null : blogStatus.trim();
-    }
-
-    public String getBlogText() {
-        return blogText;
-    }
-
-    public void setBlogText(String blogText) {
-        this.blogText = blogText == null ? null : blogText.trim();
+    public void setBlog_text(String blog_text) {
+        this.blog_text = blog_text;
     }
 }

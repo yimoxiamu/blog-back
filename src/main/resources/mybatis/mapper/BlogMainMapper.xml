@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimoxiamu.blogback.dao.BlogMainMapper">
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="blog_uuid" jdbcType="VARCHAR" property="blog_uuid" />
+    <result column="type_id" jdbcType="INTEGER" property="type_id" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blog_title" />
+    <result column="blog_description" jdbcType="VARCHAR" property="blog_description" />
+    <result column="comment_id" jdbcType="INTEGER" property="comment_id" />
+    <result column="read_count" jdbcType="INTEGER" property="read_count" />
+    <result column="like_count" jdbcType="INTEGER" property="like_count" />
+    <result column="blog_status" jdbcType="VARCHAR" property="blog_status" />
+    <result column="create_by" jdbcType="INTEGER" property="create_by" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_by" jdbcType="INTEGER" property="update_by" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="delfalg" jdbcType="VARCHAR" property="delfalg" />
+    <result column="del_date" jdbcType="TIMESTAMP" property="del_date" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yimoxiamu.blogback.entity.BlogMain">
+    <result column="blog_text" jdbcType="LONGVARCHAR" property="blog_text" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, blog_uuid, type_id, blog_title, blog_description, comment_id, read_count, like_count, 
+    blog_status, create_by, create_time, update_by, update_time, delfalg, del_date
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_text
+  </sql>
+  <select id="blogList" resultType="java.util.Map">
+      SELECT
+    bt.blog_type,
+    u.user_name as 'blog_auth',
+    bm.blog_title,
+    bm.blog_description,
+    bm.blog_uuid,
+    bm.read_count,
+    bm.like_count,
+    bc.comment_count,
+    DATE_FORMAT(bm.create_time,'%Y-%m-%d') as 'create_time'
+    FROM
+        blog_main bm
+    LEFT JOIN blog_type bt ON bm.type_id = bt.id
+    LEFT JOIN `user` u ON bm.create_by = u.id
+    LEFT JOIN blog_comment bc ON bm.comment_id
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_main
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    insert into blog_main (id, blog_uuid, type_id, 
+      blog_title, blog_description, comment_id, 
+      read_count, like_count, blog_status, 
+      create_by, create_time, update_by, 
+      update_time, delfalg, del_date, 
+      blog_text)
+    values (#{id,jdbcType=INTEGER}, #{blog_uuid,jdbcType=VARCHAR}, #{type_id,jdbcType=INTEGER}, 
+      #{blog_title,jdbcType=VARCHAR}, #{blog_description,jdbcType=VARCHAR}, #{comment_id,jdbcType=INTEGER}, 
+      #{read_count,jdbcType=INTEGER}, #{like_count,jdbcType=INTEGER}, #{blog_status,jdbcType=VARCHAR}, 
+      #{create_by,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{update_by,jdbcType=INTEGER}, 
+      #{update_time,jdbcType=TIMESTAMP}, #{delfalg,jdbcType=VARCHAR}, #{del_date,jdbcType=TIMESTAMP}, 
+      #{blog_text,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    insert into blog_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="blog_uuid != null">
+        blog_uuid,
+      </if>
+      <if test="type_id != null">
+        type_id,
+      </if>
+      <if test="blog_title != null">
+        blog_title,
+      </if>
+      <if test="blog_description != null">
+        blog_description,
+      </if>
+      <if test="comment_id != null">
+        comment_id,
+      </if>
+      <if test="read_count != null">
+        read_count,
+      </if>
+      <if test="like_count != null">
+        like_count,
+      </if>
+      <if test="blog_status != null">
+        blog_status,
+      </if>
+      <if test="create_by != null">
+        create_by,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="update_by != null">
+        update_by,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="delfalg != null">
+        delfalg,
+      </if>
+      <if test="del_date != null">
+        del_date,
+      </if>
+      <if test="blog_text != null">
+        blog_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="blog_uuid != null">
+        #{blog_uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="type_id != null">
+        #{type_id,jdbcType=INTEGER},
+      </if>
+      <if test="blog_title != null">
+        #{blog_title,jdbcType=VARCHAR},
+      </if>
+      <if test="blog_description != null">
+        #{blog_description,jdbcType=VARCHAR},
+      </if>
+      <if test="comment_id != null">
+        #{comment_id,jdbcType=INTEGER},
+      </if>
+      <if test="read_count != null">
+        #{read_count,jdbcType=INTEGER},
+      </if>
+      <if test="like_count != null">
+        #{like_count,jdbcType=INTEGER},
+      </if>
+      <if test="blog_status != null">
+        #{blog_status,jdbcType=VARCHAR},
+      </if>
+      <if test="create_by != null">
+        #{create_by,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_by != null">
+        #{update_by,jdbcType=INTEGER},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delfalg != null">
+        #{delfalg,jdbcType=VARCHAR},
+      </if>
+      <if test="del_date != null">
+        #{del_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blog_text != null">
+        #{blog_text,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    <set>
+      <if test="blog_uuid != null">
+        blog_uuid = #{blog_uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="type_id != null">
+        type_id = #{type_id,jdbcType=INTEGER},
+      </if>
+      <if test="blog_title != null">
+        blog_title = #{blog_title,jdbcType=VARCHAR},
+      </if>
+      <if test="blog_description != null">
+        blog_description = #{blog_description,jdbcType=VARCHAR},
+      </if>
+      <if test="comment_id != null">
+        comment_id = #{comment_id,jdbcType=INTEGER},
+      </if>
+      <if test="read_count != null">
+        read_count = #{read_count,jdbcType=INTEGER},
+      </if>
+      <if test="like_count != null">
+        like_count = #{like_count,jdbcType=INTEGER},
+      </if>
+      <if test="blog_status != null">
+        blog_status = #{blog_status,jdbcType=VARCHAR},
+      </if>
+      <if test="create_by != null">
+        create_by = #{create_by,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_by != null">
+        update_by = #{update_by,jdbcType=INTEGER},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delfalg != null">
+        delfalg = #{delfalg,jdbcType=VARCHAR},
+      </if>
+      <if test="del_date != null">
+        del_date = #{del_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blog_text != null">
+        blog_text = #{blog_text,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set blog_uuid = #{blog_uuid,jdbcType=VARCHAR},
+      type_id = #{type_id,jdbcType=INTEGER},
+      blog_title = #{blog_title,jdbcType=VARCHAR},
+      blog_description = #{blog_description,jdbcType=VARCHAR},
+      comment_id = #{comment_id,jdbcType=INTEGER},
+      read_count = #{read_count,jdbcType=INTEGER},
+      like_count = #{like_count,jdbcType=INTEGER},
+      blog_status = #{blog_status,jdbcType=VARCHAR},
+      create_by = #{create_by,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_by = #{update_by,jdbcType=INTEGER},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      delfalg = #{delfalg,jdbcType=VARCHAR},
+      del_date = #{del_date,jdbcType=TIMESTAMP},
+      blog_text = #{blog_text,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.BlogMain">
+    update blog_main
+    set blog_uuid = #{blog_uuid,jdbcType=VARCHAR},
+      type_id = #{type_id,jdbcType=INTEGER},
+      blog_title = #{blog_title,jdbcType=VARCHAR},
+      blog_description = #{blog_description,jdbcType=VARCHAR},
+      comment_id = #{comment_id,jdbcType=INTEGER},
+      read_count = #{read_count,jdbcType=INTEGER},
+      like_count = #{like_count,jdbcType=INTEGER},
+      blog_status = #{blog_status,jdbcType=VARCHAR},
+      create_by = #{create_by,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_by = #{update_by,jdbcType=INTEGER},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      delfalg = #{delfalg,jdbcType=VARCHAR},
+      del_date = #{del_date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
