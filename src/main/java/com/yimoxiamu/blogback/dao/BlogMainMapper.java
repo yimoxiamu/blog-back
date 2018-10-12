@@ -1,6 +1,7 @@
 package com.yimoxiamu.blogback.dao;
 
 import com.yimoxiamu.blogback.entity.BlogMain;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +26,17 @@ public interface BlogMainMapper {
      * @return
      */
     List<Map<String,Object>> blogList();
+
+    /**
+     * 通过id查询文章详情
+     * @return
+     */
+    Map<String,Object> selectBlogById(@Param(value = "id") Integer id);
+
+    /**
+     * 通过id查找文章上下文详情
+     * @param id
+     * @return
+     */
+    List<Map<String,Object>> getContextualById(@Param(value = "id") Integer id);
 }

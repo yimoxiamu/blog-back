@@ -14,6 +14,7 @@ import factory.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,5 +48,15 @@ public class BlogServiceImpl implements BlogService {
 //            return Result.error(CodeMsg.ADD_LIKE_ERROR);
 //        }
         return Result.success("ok");
+    }
+
+    @Override
+    public Result<Map<String, Object>> getBlogInfo(Integer id) {
+        Map<String,Object> blogInfo = blogMainMapper.selectBlogById(id);
+        List<Map<String,Object>> contextualInfo = blogMainMapper.getContextualById(id);
+        Map<String,Object> retMap = new HashMap<>(16);
+        retMap.put("blogInfo",blogInfo);
+        retMap.put("contextualInfo",contextualInfo);
+        return Result.success(retMap);
     }
 }

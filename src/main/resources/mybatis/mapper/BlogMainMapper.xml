@@ -30,20 +30,31 @@
   </sql>
   <select id="blogList" resultType="java.util.Map">
       SELECT
-    bt.blog_type,
-    u.user_name as 'blog_auth',
-    bm.blog_title,
-    bm.blog_description,
-    bm.blog_uuid,
-    bm.read_count,
-    bm.like_count,
-    bc.comment_count,
-    DATE_FORMAT(bm.create_time,'%Y-%m-%d') as 'create_time'
-    FROM
-        blog_main bm
-    LEFT JOIN blog_type bt ON bm.type_id = bt.id
-    LEFT JOIN `user` u ON bm.create_by = u.id
-    LEFT JOIN blog_comment bc ON bm.comment_id
+      bt.blog_type,
+      u.user_name as 'blog_auth',
+      bm.blog_title,
+      bm.blog_description,
+      bm.id,
+      bm.read_count,
+      bm.like_count,
+      bc.comment_count,
+      DATE_FORMAT(bm.create_time,'%Y-%m-%d') as 'create_time'
+      FROM
+          blog_main bm
+      LEFT JOIN blog_type bt ON bm.type_id = bt.id
+      LEFT JOIN `user` u ON bm.create_by = u.id
+      LEFT JOIN blog_comment bc ON bm.comment_id = bc.id
+  </select>
+  <select id="selectBlogById" parameterType="java.lang.Integer" resultType="java.util.Map">
+    select * from blog_main where id =${id}
+  </select>
+  <select id="getContextualById" parameterType="java.lang.Integer" resultType="java.util.Map">
+    select id,blog_title from blog_main where id in
+    (
+    (select id from blog_main where id &lt; #{id} order by id desc limit 1),
+    (select id from blog_main where id &gt; #{id} order by id asc limit 1)
+    )
+    ORDER BY id;
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 

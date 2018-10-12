@@ -4,6 +4,11 @@ package com.yimoxiamu.blogback.service;
 import com.yimoxiamu.blogback.tools.PageBean;
 import com.yimoxiamu.blogback.tools.Result;
 
+import java.util.Map;
+
+/**
+ * @Author Paw
+ */
 public interface BlogService {
     /**
      * 获取博客列表
@@ -20,5 +25,12 @@ public interface BlogService {
      * @return result
      */
     Result<String> addLike(String uuid,int likeCount);
+
+    /**
+     * 根据id查询文章详情
+     * @param id
+     * @return
+     */
+    Result<Map<String,Object>> getBlogInfo(Integer id);
 
 }
