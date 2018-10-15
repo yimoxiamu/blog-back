@@ -31,7 +31,7 @@ public class LogTest {
         map.put("naem","123");
         map.put("age",123);
         System.out.println(jsonObject.toJSONString());
-        log.error("测试日志内容为：[{}]",jsonObject);
+        log.error("测试日志内容为：[{}]");
         log.info(map);
     }
 }

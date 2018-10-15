@@ -34,9 +34,9 @@ public class BlogControl {
 
     /**
      * 获取文章列表
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param pageNum 页码
+     * @param pageSize 每页条数
+     * @return @
      */
     @GetMapping(value = "/blogList/{pageNum}/{pageSize}")
     public Result<PageBean> blogList(@PathVariable int pageNum,@PathVariable int pageSize){
@@ -44,6 +44,11 @@ public class BlogControl {
         return blogService.getBlogList(pageNum,pageSize);
     }
 
+    /**
+     * 获取文章详情
+     * @param id 文章id
+     * @return @
+     */
     @GetMapping(value = "/blogInfo/{id}")
     public Result<Map<String,Object>> blogInfo(@PathVariable int id){
         log.info("==================获取文章详情开始===============");
@@ -53,9 +58,9 @@ public class BlogControl {
 
     /**
      * 增加喜欢人数
-     * @param uuid
-     * @param likeCount
-     * @return
+     * @param uuid 文章id
+     * @param likeCount 文章喜欢人数
+     * @return @
      */
     @PostMapping(value = "/addLike")
     public Result<String> blogLike(String uuid , int likeCount){
