@@ -24,7 +24,6 @@ import java.sql.SQLException;
  * @VERSION 1.0
  **/
 @Configuration
-@PropertySource(value = "classpath:druid.properties")
 public class DruidConfig {
     private static final String DB_PREFIX = "spring.datasource";
 
