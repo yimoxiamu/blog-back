@@ -92,4 +92,19 @@ public class User {
     public void setDel_date(Date del_date) {
         this.del_date = del_date;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", user_name='" + user_name + '\'' +
+                ", user_phone='" + user_phone + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", pass_word='" + pass_word + '\'' +
+                ", head_img_id=" + head_img_id +
+                ", user_status='" + user_status + '\'' +
+                ", delflag='" + delflag + '\'' +
+                ", del_date=" + del_date +
+                '}';
+    }
 }
