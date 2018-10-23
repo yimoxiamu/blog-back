@@ -17,6 +17,8 @@ public class CodeMsg {
     public static CodeMsg TOKEN_ERROR=new CodeMsg(10011,"token非法");
     //文章阅读，点赞人数
     public static CodeMsg ADD_LIKE_ERROR=new CodeMsg(20010,"增加点赞人数发生错误");
+    //文章阅读，点赞人数
+    public static CodeMsg REGIST_ERROR=new CodeMsg(30010,"注册账号发生错误");
 
 
     public int getCode() {
