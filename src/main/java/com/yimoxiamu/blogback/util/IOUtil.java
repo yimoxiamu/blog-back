@@ -25,7 +25,7 @@ public class IOUtil {
             if(!floder.exists()){
                 floder.mkdir();
             }
-            String filePath = flodPath+"\\"+img.getOriginalFilename();
+            String filePath = flodPath+"/"+img.getOriginalFilename();
             img.transferTo(new File(filePath));
             return filePath;
         }catch (Exception e){
