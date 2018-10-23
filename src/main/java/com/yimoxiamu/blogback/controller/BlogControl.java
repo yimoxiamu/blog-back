@@ -58,13 +58,13 @@ public class BlogControl {
 
     /**
      * 增加喜欢人数
-     * @param uuid 文章id
-     * @param likeCount 文章喜欢人数
+     * @param id 文章id
      * @return @
      */
-    @PostMapping(value = "/addLike")
-    public Result<String> blogLike(String uuid , int likeCount){
-        return blogService.addLike(uuid,likeCount);
+    @PostMapping(value = "/addLike/{id}")
+    public Result<String> blogLike(@PathVariable int id){
+        log.info("==================增加文章喜欢人数开始===============");
+        return blogService.addLike(id);
     }
 
 }

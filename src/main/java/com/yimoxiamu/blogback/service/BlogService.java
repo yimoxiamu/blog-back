@@ -18,13 +18,6 @@ public interface BlogService {
      */
     Result<PageBean> getBlogList(int pageNum, int pageSize);
 
-    /**
-     * 增加对应文章喜欢人数
-     * @param uuid
-     * @param likeCount
-     * @return result
-     */
-    Result<String> addLike(String uuid,int likeCount);
 
     /**
      * 根据id查询文章详情
@@ -33,4 +26,10 @@ public interface BlogService {
      */
     Result<Map<String,Object>> getBlogInfo(Integer id);
 
+    /**
+     * 增加文章喜欢人数
+     * @param id
+     * @return
+     */
+    Result<String> addLike(Integer id);
 }

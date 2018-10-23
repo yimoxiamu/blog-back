@@ -39,4 +39,11 @@ public interface BlogMainMapper {
      * @return
      */
     List<Map<String,Object>> getContextualById(@Param(value = "id") Integer id);
+
+    /**
+     * 增加文章喜欢人数
+     * @param id
+     * @return
+     */
+    int updateLikeCount(@Param(value = "id") Integer id);
 }
