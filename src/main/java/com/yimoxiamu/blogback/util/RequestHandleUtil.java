@@ -25,7 +25,7 @@ public class RequestHandleUtil {
      * 通用请求token获取方法
      * @return token
      */
-    private String getToken(){
+    private static String getToken(){
         String token = null;
         HttpServletRequest request = getRequest();
         if(request != null){
@@ -39,7 +39,7 @@ public class RequestHandleUtil {
      * 获取本次请求的request
      * @return request
      */
-    private HttpServletRequest getRequest(){
+    private static HttpServletRequest getRequest(){
         HttpServletRequest request=null;
         try {
             RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
