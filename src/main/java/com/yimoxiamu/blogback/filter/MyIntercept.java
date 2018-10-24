@@ -1,13 +1,12 @@
 package com.yimoxiamu.blogback.filter;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import com.yimoxiamu.blogback.tools.CodeMsg;
 import com.yimoxiamu.blogback.util.JSONUtil;
 import com.yimoxiamu.blogback.util.RequestContextHolderUtils;
 import com.yimoxiamu.blogback.util.StringUtils;
 import com.yimoxiamu.blogback.util.TokenUtil;
-import factory.Log;
-import factory.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings(value = "unchecked")
 public class MyIntercept implements HandlerInterceptor {
 
-    private static final Log log = LogFactory.getLog(MyIntercept.class);
+    private static final Logger log = LoggerFactory.getLogger(MyIntercept.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

@@ -3,8 +3,8 @@ package com.yimoxiamu.blogback.controller;
 import com.yimoxiamu.blogback.service.BlogService;
 import com.yimoxiamu.blogback.tools.PageBean;
 import com.yimoxiamu.blogback.tools.Result;
-import factory.Log;
-import factory.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ import java.util.Map;
 @SuppressWarnings(value = "unchecked")
 public class BlogControl {
 
-    private static final Log log = LogFactory.getLog(BlogControl.class);
+    private static final Logger log = LoggerFactory.getLogger(BlogControl.class);
 
     private final BlogService blogService;
 

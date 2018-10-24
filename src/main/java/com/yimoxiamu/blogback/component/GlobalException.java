@@ -2,8 +2,8 @@ package com.yimoxiamu.blogback.component;
 
 import com.yimoxiamu.blogback.tools.CodeMsg;
 import com.yimoxiamu.blogback.tools.Result;
-import factory.Log;
-import factory.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @SuppressWarnings(value = "unchecked")
 public class GlobalException<T> {
 
-    private static final Log log=LogFactory.getLog(GlobalException.class);
-
+    private static final Logger log = LoggerFactory.getLogger(GlobalException.class);
     @ExceptionHandler(value = Exception.class)
     public Result<T> catchGlobalException(Exception e){
         log.error("发生异常,异常类型为："+e.getMessage());

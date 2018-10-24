@@ -1,8 +1,6 @@
 package com.yimoxiamu.blogback;
 
 import com.alibaba.fastjson.JSONObject;
-import factory.Log;
-import factory.LogFactory;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,18 +18,4 @@ import java.util.Map;
 @SpringBootTest
 public class LogTest {
 
-    private static final Log log = LogFactory.getLog(LogTest.class);
-
-    @Test
-    public void test(){
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("test","nan");
-        jsonObject.put("age",132);
-        Map<String,Object> map=new HashMap<>();
-        map.put("naem","123");
-        map.put("age",123);
-        System.out.println(jsonObject.toJSONString());
-        log.error("测试日志内容为：[{}]");
-        log.info(map);
-    }
 }

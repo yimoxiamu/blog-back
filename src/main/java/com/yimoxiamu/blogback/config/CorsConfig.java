@@ -1,7 +1,7 @@
 package com.yimoxiamu.blogback.config;
 
-import factory.Log;
-import factory.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
 
-    private static final Log log=LogFactory.getLog(CorsConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(CorsConfig.class);
 
     @Value("${web.allow.url}")
     private  String WEB_ALLOW_URL;

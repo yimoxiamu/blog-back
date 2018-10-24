@@ -1,14 +1,13 @@
 package com.yimoxiamu.blogback.service.Impl;
 
 import com.yimoxiamu.blogback.component.CustomGolbalException;
-import com.yimoxiamu.blogback.component.GlobalException;
 import com.yimoxiamu.blogback.dao.BlogMainMapper;
 import com.yimoxiamu.blogback.service.BlogService;
 import com.yimoxiamu.blogback.tools.CodeMsg;
 import com.yimoxiamu.blogback.tools.PageBean;
 import com.yimoxiamu.blogback.tools.Result;
-import factory.Log;
-import factory.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ import java.util.Map;
 @Service
 public class BlogServiceImpl implements BlogService {
 
-    private static final Log log = LogFactory.getLog(BlogServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(BlogServiceImpl.class);
 
     private final BlogMainMapper blogMainMapper;
 
