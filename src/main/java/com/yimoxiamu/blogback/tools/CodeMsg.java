@@ -17,8 +17,11 @@ public class CodeMsg {
     public static CodeMsg TOKEN_ERROR=new CodeMsg(10011,"token非法");
     //文章阅读，点赞人数
     public static CodeMsg ADD_LIKE_ERROR=new CodeMsg(20010,"增加点赞人数发生错误");
-    //文章阅读，点赞人数
+    public static CodeMsg ADD_READ_ERROR=new CodeMsg(20011,"增加阅读人数发生错误");
+    //登录注册
     public static CodeMsg REGIST_ERROR=new CodeMsg(30010,"注册账号发生错误");
+    //发表文章异常
+    public static CodeMsg PULL_BLOG_ERROR=new CodeMsg(20011,"增加阅读人数发生错误");
 
 
     public int getCode() {

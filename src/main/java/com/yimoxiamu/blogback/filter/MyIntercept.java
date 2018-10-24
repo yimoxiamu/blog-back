@@ -38,7 +38,7 @@ public class MyIntercept implements HandlerInterceptor {
         if(StringUtils.isNotBlank(token) && TokenUtil.isValid(token)){
             return true;
         }else{
-            log.info("token不存在或是已经过期");
+            log.info("==================token不存在或是已经过期===================");
             responseWriter(response,JSONUtil.bean2JsonString(CodeMsg.TOKEN_ERROR));
             return false;
         }

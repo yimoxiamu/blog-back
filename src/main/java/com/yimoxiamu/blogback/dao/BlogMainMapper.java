@@ -46,4 +46,11 @@ public interface BlogMainMapper {
      * @return
      */
     int updateLikeCount(@Param(value = "id") Integer id);
+
+    /**
+     * 增加文章阅读人数
+     * @param id
+     * @return
+     */
+    int updateReadCount(@Param(value = "id") Integer id);
 }

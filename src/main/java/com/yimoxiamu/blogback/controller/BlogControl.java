@@ -1,8 +1,10 @@
 package com.yimoxiamu.blogback.controller;
 
+import com.yimoxiamu.blogback.entity.BlogMain;
 import com.yimoxiamu.blogback.service.BlogService;
 import com.yimoxiamu.blogback.tools.PageBean;
 import com.yimoxiamu.blogback.tools.Result;
+import com.yimoxiamu.blogback.util.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class BlogControl {
      * @param pageSize 每页条数
      * @return @
      */
-    @GetMapping(value = "/blogList/{pageNum}/{pageSize}")
+    @GetMapping(value = "/list/{pageNum}/{pageSize}")
     public Result<PageBean> blogList(@PathVariable int pageNum,@PathVariable int pageSize){
         log.info("=================获取文章列表开始===============");
         return blogService.getBlogList(pageNum,pageSize);
@@ -49,7 +51,7 @@ public class BlogControl {
      * @param id 文章id
      * @return @
      */
-    @GetMapping(value = "/blogInfo/{id}")
+    @GetMapping(value = "/info/{id}")
     public Result<Map<String,Object>> blogInfo(@PathVariable int id){
         log.info("==================获取文章详情开始===============");
         return blogService.getBlogInfo(id);
@@ -61,10 +63,31 @@ public class BlogControl {
      * @param id 文章id
      * @return @
      */
-    @PostMapping(value = "/addLike/{id}")
-    public Result<String> blogLike(@PathVariable int id){
+    @PostMapping(value = "/addLike")
+    public Result<String> blogLike(int id){
         log.info("==================增加文章喜欢人数开始===============");
         return blogService.addLike(id);
     }
 
+    /**
+     * 增加阅读人数
+     * @param id
+     * @return
+     */
+    @PostMapping(value = "/addRead")
+    public Result<String> blogRead(int id){
+        log.info("==================增加阅读人数开始===================");
+        return blogService.addRead(id);
+    }
+
+    /**
+     * 发表文章
+     * @param blogMain
+     * @return
+     */
+    @PutMapping(value = "/pull")
+    public Result<String> pullBlog(@RequestBody BlogMain blogMain){
+        log.info("==================发表文章开始,前段传递过来的参数为:[{}]====================",JSONUtil.bean2JsonString(blogMain));
+        return blogService.pullBlog(blogMain);
+    }
 }

@@ -74,6 +74,9 @@
   <update id="updateLikeCount" parameterType="java.lang.Integer">
   update blog_main bm SET bm.like_count = bm.like_count+1 where bm.id = #{id}
   </update>
+  <update id="updateReadCount" parameterType="java.lang.Integer">
+    update blog_main bm SET bm.read_count = bm.read_count+1 where bm.id = #{id}
+  </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />

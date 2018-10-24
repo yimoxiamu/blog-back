@@ -1,6 +1,7 @@
 package com.yimoxiamu.blogback.service;
 
 
+import com.yimoxiamu.blogback.entity.BlogMain;
 import com.yimoxiamu.blogback.tools.PageBean;
 import com.yimoxiamu.blogback.tools.Result;
 
@@ -32,4 +33,18 @@ public interface BlogService {
      * @return
      */
     Result<String> addLike(Integer id);
+
+    /**
+     * 增加阅读人数
+     * @param id
+     * @return
+     */
+    Result<String> addRead(Integer id);
+
+    /**
+     * 发表文章
+     * @param blogMain
+     * @return
+     */
+    Result<String> pullBlog(BlogMain blogMain);
 }

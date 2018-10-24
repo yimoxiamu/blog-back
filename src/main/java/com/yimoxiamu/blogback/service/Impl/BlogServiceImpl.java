@@ -1,7 +1,9 @@
 package com.yimoxiamu.blogback.service.Impl;
 
+import com.sun.tools.javac.jvm.Code;
 import com.yimoxiamu.blogback.component.CustomGolbalException;
 import com.yimoxiamu.blogback.dao.BlogMainMapper;
+import com.yimoxiamu.blogback.entity.BlogMain;
 import com.yimoxiamu.blogback.service.BlogService;
 import com.yimoxiamu.blogback.tools.CodeMsg;
 import com.yimoxiamu.blogback.tools.PageBean;
@@ -49,6 +51,24 @@ public class BlogServiceImpl implements BlogService {
             throw new CustomGolbalException(CodeMsg.ADD_LIKE_ERROR);
         }
         return Result.success("增加喜欢人数成功");
+    }
+
+    @Override
+    public Result<String> addRead(Integer id) {
+        int i = blogMainMapper.updateReadCount(id);
+        if(i != 1){
+            throw new CustomGolbalException(CodeMsg.ADD_READ_ERROR);
+        }
+        return Result.success("增加阅读人数成功");
+    }
+
+    @Override
+    public Result<String> pullBlog(BlogMain blogMain) {
+        int i = blogMainMapper.insertSelective(blogMain);
+        if(i != 1 ){
+            throw new CustomGolbalException(CodeMsg.PULL_BLOG_ERROR);
+        }
+        return Result.success("发表成功");
     }
 
     @Override
