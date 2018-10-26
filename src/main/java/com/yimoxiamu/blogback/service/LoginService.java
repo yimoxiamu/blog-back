@@ -3,6 +3,8 @@ package com.yimoxiamu.blogback.service;
 import com.yimoxiamu.blogback.entity.User;
 import com.yimoxiamu.blogback.tools.Result;
 
+import java.util.Map;
+
 public interface LoginService {
 
     /**
@@ -10,5 +12,12 @@ public interface LoginService {
      * @param user
      * @return
      */
-    public Result<String> doRegist(User user);
+     Result<String> doRegist(User user);
+
+    /**
+     * 登录逻辑
+     * @param user
+     * @return
+     */
+     Result<Map<String,String>> doLogin(User user);
 }

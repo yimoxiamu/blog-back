@@ -5,17 +5,15 @@ import java.util.Date;
 public class BlogImg {
     private Integer id;
 
-    private Integer blog_id;
-
     private String img_url;
-
-    private String img_desc;
 
     private Integer img_type;
 
     private String delflag;
 
     private Date del_date;
+
+    private Integer user_id;
 
     public Integer getId() {
         return id;
@@ -25,28 +23,12 @@ public class BlogImg {
         this.id = id;
     }
 
-    public Integer getBlog_id() {
-        return blog_id;
-    }
-
-    public void setBlog_id(Integer blog_id) {
-        this.blog_id = blog_id;
-    }
-
     public String getImg_url() {
         return img_url;
     }
 
     public void setImg_url(String img_url) {
         this.img_url = img_url;
-    }
-
-    public String getImg_desc() {
-        return img_desc;
-    }
-
-    public void setImg_desc(String img_desc) {
-        this.img_desc = img_desc;
     }
 
     public Integer getImg_type() {
@@ -71,5 +53,13 @@ public class BlogImg {
 
     public void setDel_date(Date del_date) {
         this.del_date = del_date;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 }

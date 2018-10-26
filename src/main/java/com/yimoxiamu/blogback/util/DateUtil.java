@@ -53,7 +53,7 @@ public class DateUtil {
      * @return
      */
     public static Date getTokenFailureTime(){
-        Date date = new Date(System.currentTimeMillis()+48*60*60*1000);
+        Date date = new Date(System.currentTimeMillis()+24*60*60*1000);
         SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd");
         String time = formatter.format(date);
         String failureTimeStr=time+" 03:00:00";

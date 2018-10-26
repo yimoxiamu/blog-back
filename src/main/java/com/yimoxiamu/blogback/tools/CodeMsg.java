@@ -14,12 +14,14 @@ public class CodeMsg {
 
     //通用异常类型
     public static CodeMsg SERVER_ERROR=new CodeMsg(10010,"服务器异常");
+    public static CodeMsg DATA_ERROR=new CodeMsg(10012,"服务器异常");
     public static CodeMsg TOKEN_ERROR=new CodeMsg(10011,"token非法");
     //文章阅读，点赞人数
     public static CodeMsg ADD_LIKE_ERROR=new CodeMsg(20010,"增加点赞人数发生错误");
     public static CodeMsg ADD_READ_ERROR=new CodeMsg(20011,"增加阅读人数发生错误");
     //登录注册
-    public static CodeMsg REGIST_ERROR=new CodeMsg(30010,"注册账号发生错误");
+    public static CodeMsg USER_IS_HAS=new CodeMsg(30010,"账号已存在！");
+    public static CodeMsg PASS_WORD_ERROR=new CodeMsg(30011,"账号密码验证失败");
     //发表文章异常
     public static CodeMsg PULL_BLOG_ERROR=new CodeMsg(20011,"增加阅读人数发生错误");
 

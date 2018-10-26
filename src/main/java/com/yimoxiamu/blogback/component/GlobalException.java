@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
+
 /**
  * @ClassName GlobalException
  * @Description TODO
@@ -26,6 +28,8 @@ public class GlobalException<T> {
         e.printStackTrace();
         if(e instanceof CustomGolbalException){
             return Result.error(((CustomGolbalException) e).getCodeMsg());
+        }else if(e instanceof SQLException){
+            return Result.error(CodeMsg.DATA_ERROR);
         }
         return Result.error(CodeMsg.SERVER_ERROR);
     }

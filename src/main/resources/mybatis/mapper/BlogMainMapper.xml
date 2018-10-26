@@ -59,7 +59,7 @@
     FROM
         blog_main bm
     left join `user` u on bm.create_by = u.id
-    left join blog_comment bc on bc.id = bm.create_by
+    left join blog_comment bc on bc.id = bm.comment_id
     WHERE
     bm.id = #{id}
   </select>
