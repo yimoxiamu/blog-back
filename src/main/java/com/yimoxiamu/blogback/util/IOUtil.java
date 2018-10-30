@@ -27,7 +27,7 @@ public class IOUtil {
             }
             String filePath = flodPath+"/"+img.getOriginalFilename();
             img.transferTo(new File(filePath));
-            return filePath;
+            return "http://154.8.218.29:8095/img/"+img.getOriginalFilename();
         }catch (Exception e){
             return null;
         }

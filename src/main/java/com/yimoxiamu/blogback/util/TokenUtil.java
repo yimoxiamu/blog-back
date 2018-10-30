@@ -61,7 +61,7 @@ public class TokenUtil {
         String jwToken = RequestContextHolderUtils.getAuthorizationToken();
         if (isValid(jwToken)) {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwToken);
-            String userId = String.valueOf(claimsJws.getBody().get("userid"));
+            String userId = String.valueOf(claimsJws.getBody().get("userId"));
             return userId;
         }
         return null;
@@ -76,7 +76,7 @@ public class TokenUtil {
         String jwToken=RequestContextHolderUtils.getAuthorizationToken();
         if (isValid(jwToken)) {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwToken);
-            String userName = String.valueOf(claimsJws.getBody().get("username"));
+            String userName = String.valueOf(claimsJws.getBody().get("userName"));
             return userName;
         }
         return null;
