@@ -27,9 +27,9 @@ public class DateUtil {
      * @return
      */
     public static String getTokenExpireTime(){
-        Date date=getTokenFailureTime();
+        Date date = getTokenFailureTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String expireTime=format.format(date);
+        String expireTime = format.format(date);
         return expireTime;
     }
 
