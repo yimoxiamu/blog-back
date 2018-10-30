@@ -20,4 +20,11 @@ public interface LoginService {
      * @return
      */
      Result<Map<String,String>> doLogin(User user);
+
+    /**
+     *
+     * @param email
+     * @return
+     */
+     Result<String> sendEmail(String email);
 }

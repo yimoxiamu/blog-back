@@ -33,4 +33,10 @@ public class UserControl {
         log.info("==================登录逻辑开始，前段传递过来的参数为：[{}]====================",user.toString());
         return loginService.doLogin(user);
     }
+
+    @RequestMapping(value = "/sendEmail")
+    public Result<String> sendEmail(String email){
+        log.info("===================发送邮件开始，前端传递过来的参数为:[{}]===================",email);
+        return loginService.sendEmail(email);
+    }
 }
