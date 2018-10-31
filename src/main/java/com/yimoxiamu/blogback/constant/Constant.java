@@ -12,10 +12,10 @@ public class Constant {
     /**
      * 存入redis缓存中的注册邮件验证码头
      */
-    private static final String REGIST_CHECK_EMAIL_HEAD = "REGIST_CHECK_EMAIL_HEAD_";
+    public static final String REGIST_CHECK_EMAIL_HEAD = "REGIST_CHECK_EMAIL_HEAD_";
 
     /**
      * 存入redis缓存中的登录邮件验证码头
      */
-    private static final String LOGIN_CHECK_EMAIL_HEAD = "LOGIN_CHECK_EMAIL_HEAD_";
+    public static final String LOGIN_CHECK_EMAIL_HEAD = "LOGIN_CHECK_EMAIL_HEAD_";
 }

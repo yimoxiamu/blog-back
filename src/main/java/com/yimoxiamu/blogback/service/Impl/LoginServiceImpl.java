@@ -1,5 +1,6 @@
 package com.yimoxiamu.blogback.service.Impl;
 
+import com.yimoxiamu.blogback.constant.Constant;
 import com.yimoxiamu.blogback.dao.UserMapper;
 import com.yimoxiamu.blogback.entity.User;
 import com.yimoxiamu.blogback.redis.RedisClient;
@@ -67,9 +68,10 @@ public class LoginServiceImpl implements LoginService {
     public Result<String> sendEmail(String email) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         String checkNum = String.valueOf((Math.random()*9+1)*1000);
+        redisClient.setCacheValueForTime(Constant.REGIST_CHECK_EMAIL_HEAD,checkNum,3*60);
         mailMessage.setFrom(emailFrom);
         mailMessage.setTo(email);
-        mailMessage.setText("您好,您本次注册的验证码为： "+Math.random()*9+1*1000+" !");
+        mailMessage.setText("您好,您本次注册的验证码为： "+checkNum+"。 验证码三分钟之内有效，请及时验证。");
         mailMessage.setSubject("您的验证码到啦~");
         try {
             javaMailSender.send(mailMessage);

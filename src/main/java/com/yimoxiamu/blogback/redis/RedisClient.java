@@ -49,8 +49,8 @@ public class RedisClient {
      */
     public void setCacheValue(String key, String value) {
         try {
-            if(StringUtils.isNotBlank(getCacheValue(key))){
-
+            if(exists(key)){
+                delCacheByKey(key);
             }
             redisTemplate.opsForValue().set(key, value);
         } catch (Exception e) {
@@ -72,6 +72,9 @@ public class RedisClient {
      * @param value
      */
     public void setCacheValueForTime(String key, String value, long time) {
+        if(exists(key)){
+            delCacheByKey(key);
+        }
         redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
     }
 
