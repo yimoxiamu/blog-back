@@ -66,10 +66,11 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Result<String> sendEmail(String email) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+        String checkNum = String.valueOf((Math.random()*9+1)*1000);
         mailMessage.setFrom(emailFrom);
         mailMessage.setTo(email);
-        mailMessage.setText("这是一封邮件");
-        mailMessage.setSubject("这是标题");
+        mailMessage.setText("您好,您本次注册的验证码为： "+Math.random()*9+1*1000+" !");
+        mailMessage.setSubject("您的验证码到啦~");
         try {
             javaMailSender.send(mailMessage);
             log.info("发送邮件成功！");
