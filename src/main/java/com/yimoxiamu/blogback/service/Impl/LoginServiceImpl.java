@@ -68,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
     public Result<String> sendEmail(String email) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         String checkNum = String.valueOf((Math.random()*9+1)*1000);
-        redisClient.setCacheValueForTime(Constant.REGIST_CHECK_EMAIL_HEAD,checkNum,3*60);
+        redisClient.setCacheValueForTime(Constant.REGIST_CHECK_EMAIL_HEAD+email,checkNum,3*60);
         mailMessage.setFrom(emailFrom);
         mailMessage.setTo(email);
         mailMessage.setText("您好,您本次注册的验证码为： "+checkNum+"。 验证码三分钟之内有效，请及时验证。");
@@ -81,6 +81,6 @@ public class LoginServiceImpl implements LoginService {
             log.info("发送邮件出现错误");
         }
 
-        return Result.success("ok");
+        return Result.success("验证码发送成功！");
     }
 }

@@ -36,7 +36,7 @@ public class BlogImgServiceImpl implements BlogImgService {
         BlogImg blogImg = new BlogImg();
         blogImg.setImg_url(imgWebUrl);
         blogImg.setImg_type(1);
-        blogImg.setUser_id(Integer.valueOf(TokenUtil.getUserId() == null? "1":TokenUtil.getUserId()));
+        blogImg.setUser_id(Integer.valueOf(TokenUtil.getUserId(token) == null? "1":TokenUtil.getUserId()));
         blogImgMapper.insertSelective(blogImg);
         Map<String,Object> map = new HashMap<>(16);
         map.put("uploaded",1);

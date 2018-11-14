@@ -67,6 +67,21 @@ public class TokenUtil {
         return null;
     }
 
+
+    /**
+     * 获取usrId
+     * @param
+     * @return
+     */
+    public static String getUserId(String jwToken) {
+        if (isValid(jwToken)) {
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwToken);
+            String userId = String.valueOf(claimsJws.getBody().get("userId"));
+            return userId;
+        }
+        return null;
+    }
+
     /**
      * 获取userName
      * @param

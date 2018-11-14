@@ -57,4 +57,8 @@ public class StringUtils {
 		return !isBlank(object);
 	}
 
+	public static String toString(Object o) {
+		return (o == null ) ? "" : o.toString();
+	}
+
 }
