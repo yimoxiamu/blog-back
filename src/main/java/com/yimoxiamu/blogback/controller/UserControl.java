@@ -28,18 +28,21 @@ public class UserControl {
         log.info("==================注册逻辑开始，前段传递过来的参数为：[{}]====================",user.toString());
         return loginService.doRegist(user);
     }
+
     @SysLog(value = "登录")
     @PostMapping(value = "/doLogin")
     public Result<Map<String,String>> doLogin(User user){
         log.info("==================登录逻辑开始，前段传递过来的参数为：[{}]====================",user.toString());
         return loginService.doLogin(user);
     }
+
     @SysLog(value = "发送验证码")
     @RequestMapping(value = "/sendEmail")
     public Result<String> sendEmail(String email){
         log.info("===================发送邮件开始，前端传递过来的参数为:[{}]===================",email);
         return loginService.sendEmail(email);
     }
+
     @SysLog(value = "验证验证码")
     @RequestMapping(value = "/checkEmail")
     public Result<String> checkEmail(String checkNum){
