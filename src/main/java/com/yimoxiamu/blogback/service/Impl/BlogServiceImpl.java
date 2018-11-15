@@ -40,7 +40,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Result<PageBean> getBlogList(int pageNum, int pageSize) {
-        PageBean<Map<String,Object>> pageBean=PageBean.setUp(pageNum,pageSize).doSelect(blogMainMapper::blogList);
+        PageBean<Map<String,Object>> pageBean = PageBean.setUp(pageNum,pageSize).doSelect(blogMainMapper::blogList);
         return Result.success(pageBean);
     }
 

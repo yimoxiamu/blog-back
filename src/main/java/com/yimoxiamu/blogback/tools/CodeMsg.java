@@ -22,6 +22,7 @@ public class CodeMsg {
     //登录注册
     public static CodeMsg USER_IS_HAS=new CodeMsg(30010,"账号已存在！");
     public static CodeMsg PASS_WORD_ERROR=new CodeMsg(30011,"账号密码验证失败");
+    public static CodeMsg SEND_EMAIL_ERROR=new CodeMsg(30012,"发送邮件发生错误");
     //发表文章异常
     public static CodeMsg PULL_BLOG_ERROR=new CodeMsg(20011,"增加阅读人数发生错误");
 

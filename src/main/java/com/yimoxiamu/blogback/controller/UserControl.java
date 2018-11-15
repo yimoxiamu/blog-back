@@ -39,4 +39,10 @@ public class UserControl {
         log.info("===================发送邮件开始，前端传递过来的参数为:[{}]===================",email);
         return loginService.sendEmail(email);
     }
+
+    @RequestMapping(value = "/checkEmail")
+    public Result<String> checkEmail(String checkNum){
+        log.info("===================验证邮箱验证码开始，前端传递过来的参数为:[{}]===================",checkNum);
+        return loginService.checkEmail(checkNum);
+    }
 }

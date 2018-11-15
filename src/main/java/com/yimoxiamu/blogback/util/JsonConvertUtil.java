@@ -37,7 +37,7 @@ public class JsonConvertUtil {
 		config.put(java.util.Date.class, new FastJsonDateFormatSerializer());
 		config.put(java.sql.Date.class, new FastJsonDateFormatSerializer());
 		config.put(java.sql.Timestamp.class, new FastJsonDateFormatSerializer());
-		return com.alibaba.fastjson.JSON.toJSONString(object, config, SerializerFeature.WriteDateUseDateFormat, SerializerFeature.WriteMapNullValue);
+		return com.alibaba.fastjson.JSON.toJSONString(object, config, SerializerFeature.WriteDateUseDateFormat);
 	}
 	
 	public static boolean IsJsonString(Object obj) {

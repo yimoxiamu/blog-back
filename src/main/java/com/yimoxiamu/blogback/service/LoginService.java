@@ -22,9 +22,16 @@ public interface LoginService {
      Result<Map<String,String>> doLogin(User user);
 
     /**
-     *
+     * 发送邮箱验证码逻辑
      * @param email
      * @return
      */
      Result<String> sendEmail(String email);
+
+    /**
+     * 验证邮箱验证码逻辑
+     * @param email
+     * @return
+     */
+    Result<String> checkEmail(String email);
 }

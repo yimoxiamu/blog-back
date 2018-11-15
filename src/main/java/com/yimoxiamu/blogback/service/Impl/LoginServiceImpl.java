@@ -1,5 +1,6 @@
 package com.yimoxiamu.blogback.service.Impl;
 
+import com.yimoxiamu.blogback.component.CustomGolbalException;
 import com.yimoxiamu.blogback.constant.Constant;
 import com.yimoxiamu.blogback.dao.UserMapper;
 import com.yimoxiamu.blogback.entity.User;
@@ -67,20 +68,26 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Result<String> sendEmail(String email) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        String checkNum = String.valueOf((Math.random()*9+1)*1000);
-        redisClient.setCacheValueForTime(Constant.REGIST_CHECK_EMAIL_HEAD+email,checkNum,3*60);
+        String checkNum = String.valueOf((int)((Math.random()*9+1)*1000));
         mailMessage.setFrom(emailFrom);
         mailMessage.setTo(email);
         mailMessage.setText("您好,您本次注册的验证码为： "+checkNum+"。 验证码三分钟之内有效，请及时验证。");
         mailMessage.setSubject("您的验证码到啦~");
         try {
             javaMailSender.send(mailMessage);
+            redisClient.setCacheValueForTime(Constant.REGIST_CHECK_EMAIL_HEAD+email,checkNum,3*60);
             log.info("发送邮件成功！");
         }catch (Exception e){
             e.printStackTrace();
             log.info("发送邮件出现错误");
+            throw new CustomGolbalException(CodeMsg.SEND_EMAIL_ERROR);
         }
 
         return Result.success("验证码发送成功！");
+    }
+
+    @Override
+    public Result<String> checkEmail(String checkNum) {
+        return null;
     }
 }

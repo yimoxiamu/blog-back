@@ -13,8 +13,14 @@
   <sql id="Base_Column_List">
     id, blog_id, img_url, img_desc, img_type, delflag, del_date
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByUserId" parameterType="java.lang.String" resultType="com.yimoxiamu.blogback.entity.BlogImg">
     select 
+    img_url
+    from blog_img
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from blog_img
     where id = #{id,jdbcType=INTEGER}
