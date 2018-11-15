@@ -31,6 +31,7 @@ public class ImgControl {
      * @param token
      * @return
      */
+    @SysLog(value = "上传图片")
     @RequestMapping(value = "/upload")
     public Map<String,Object> imgUpload(@RequestParam(value = "upload") MultipartFile upload,@RequestParam(value = "token") String token){
         logger.info(""+upload.getSize());

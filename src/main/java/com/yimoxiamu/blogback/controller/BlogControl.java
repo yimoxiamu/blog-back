@@ -4,6 +4,7 @@ import com.yimoxiamu.blogback.entity.BlogMain;
 import com.yimoxiamu.blogback.service.BlogService;
 import com.yimoxiamu.blogback.tools.PageBean;
 import com.yimoxiamu.blogback.tools.Result;
+import com.yimoxiamu.blogback.tools.SysLog;
 import com.yimoxiamu.blogback.util.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public class BlogControl {
      * @param pageSize 每页条数
      * @return @
      */
+    @SysLog(value = "获取文章列表")
     @GetMapping(value = "/list/{pageNum}/{pageSize}")
     public Result<PageBean> blogList(@PathVariable int pageNum,@PathVariable int pageSize){
         log.info("=================获取文章列表开始===============");
@@ -51,6 +53,7 @@ public class BlogControl {
      * @param id 文章id
      * @return @
      */
+    @SysLog(value = "文章详情")
     @GetMapping(value = "/info/{id}")
     public Result<Map<String,Object>> blogInfo(@PathVariable int id){
         log.info("==================获取文章详情开始===============");
@@ -63,6 +66,7 @@ public class BlogControl {
      * @param id 文章id
      * @return @
      */
+    @SysLog(value = "增加喜欢人数")
     @PostMapping(value = "/addLike")
     public Result<String> blogLike(int id){
         log.info("==================增加文章喜欢人数开始===============");
@@ -74,6 +78,7 @@ public class BlogControl {
      * @param id
      * @return
      */
+    @SysLog(value = "增加阅读人数")
     @PostMapping(value = "/addRead")
     public Result<String> blogRead(int id){
         log.info("==================增加阅读人数开始===================");
@@ -85,6 +90,7 @@ public class BlogControl {
      * @param blogMain
      * @return
      */
+    @SysLog(value = "发表文章")
     @PutMapping(value = "/pull")
     public Result<String> pullBlog(@RequestBody BlogMain blogMain){
         log.info("==================发表文章开始,前段传递过来的参数为:[{}]====================",JSONUtil.bean2JsonString(blogMain));

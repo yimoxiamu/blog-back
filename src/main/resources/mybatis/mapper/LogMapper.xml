@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimoxiamu.blogback.dao.LogMapper">
+  <resultMap id="BaseResultMap" type="com.yimoxiamu.blogback.entity.Log">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="request_path" jdbcType="VARCHAR" property="request_path" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="request_content" jdbcType="LONGVARCHAR" property="request_content" />
+    <result column="response_content" jdbcType="LONGVARCHAR" property="response_content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, type, request_path, ip, create_time,request_content, response_content
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yimoxiamu.blogback.entity.Log">
+    insert into log (id, user_id, type, 
+      request_path, ip, create_time, 
+      request_content, response_content
+      )
+    values (#{id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{request_path,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{request_content,jdbcType=LONGVARCHAR}, #{response_content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yimoxiamu.blogback.entity.Log">
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="request_path != null">
+        request_path,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="request_content != null">
+        request_content,
+      </if>
+      <if test="response_content != null">
+        response_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="request_path != null">
+        #{request_path,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="request_content != null">
+        #{request_content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="response_content != null">
+        #{response_content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yimoxiamu.blogback.entity.Log">
+    update log
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="request_path != null">
+        request_path = #{request_path,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="request_content != null">
+        request_content = #{request_content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="response_content != null">
+        response_content = #{response_content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yimoxiamu.blogback.entity.Log">
+    update log
+    set user_id = #{user_id,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      request_path = #{request_path,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      request_content = #{request_content,jdbcType=LONGVARCHAR},
+      response_content = #{response_content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yimoxiamu.blogback.entity.Log">
+    update log
+    set user_id = #{user_id,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      request_path = #{request_path,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
