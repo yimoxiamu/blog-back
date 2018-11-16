@@ -13,14 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+/**
+ * @author xiamu
+ */
 @RestController
 @RequestMapping("/user")
 public class UserControl {
 
     private static final Logger log = LoggerFactory.getLogger(UserControl.class);
 
+    private final LoginService loginService;
+
     @Autowired
-    private LoginService loginService;
+    public UserControl(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @SysLog(value = "注册账号")
     @PostMapping(value = "/doRegist")

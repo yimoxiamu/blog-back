@@ -24,8 +24,12 @@ public class MvcConfig implements WebMvcConfigurer {
     @Value("${web.un.need,inter.url}")
     private String unNeedInterUrl;
 
+    private final MyIntercept myIntercept;
+
     @Autowired
-    private MyIntercept myIntercept;
+    public MvcConfig(MyIntercept myIntercept) {
+        this.myIntercept = myIntercept;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

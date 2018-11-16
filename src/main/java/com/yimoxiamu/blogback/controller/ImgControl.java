@@ -16,14 +16,21 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author xiamu
+ */
 @RestController
 @RequestMapping(value = "img")
 public class ImgControl {
 
-    @Autowired
-    private BlogImgService blogImgService;
+    private final BlogImgService blogImgService;
 
     private static final Logger logger = LoggerFactory.getLogger(ImgControl.class);
+
+    @Autowired
+    public ImgControl(BlogImgService blogImgService) {
+        this.blogImgService = blogImgService;
+    }
 
     /**
      * 上传图片

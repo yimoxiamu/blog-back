@@ -10,12 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author xiamu
+ */
 @RestController
 @RequestMapping(value = "/type")
 public class BlogTypeControl {
 
+    private final BlogTypeService blogTypeService;
+
     @Autowired
-    private BlogTypeService blogTypeService;
+    public BlogTypeControl(BlogTypeService blogTypeService) {
+        this.blogTypeService = blogTypeService;
+    }
 
     @GetMapping(value = "/typeList")
     public Result<List<Map<String,Object>>> typeList(){

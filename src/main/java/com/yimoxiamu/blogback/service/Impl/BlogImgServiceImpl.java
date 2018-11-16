@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @ClassName BlogImgServiceImpl
@@ -25,11 +26,15 @@ import java.util.Map;
  **/
 @Service
 public class BlogImgServiceImpl implements BlogImgService {
-    @Autowired(required = false)
-    private BlogImgMapper blogImgMapper;
+    private final BlogImgMapper blogImgMapper;
 
     @Value("${cdn.path}")
     private String floder;
+
+    @Autowired(required = false)
+    public BlogImgServiceImpl(BlogImgMapper blogImgMapper) {
+        this.blogImgMapper = blogImgMapper;
+    }
 
     @Override
     public Map<String, Object> saveImg(MultipartFile file, String token) {
@@ -38,7 +43,7 @@ public class BlogImgServiceImpl implements BlogImgService {
         BlogImg blogImg = new BlogImg();
         blogImg.setImg_url(imgWebUrl);
         blogImg.setImg_type(1);
-        blogImg.setUser_id(Integer.valueOf(TokenUtil.getUserId(token) == null? "1":TokenUtil.getUserId()));
+        blogImg.setUser_id(Integer.valueOf(Objects.requireNonNull(TokenUtil.getUserId(token) == null ? "1" : TokenUtil.getUserId())));
         blogImgMapper.insertSelective(blogImg);
         Map<String,Object> map = new HashMap<>(16);
         map.put("uploaded",1);

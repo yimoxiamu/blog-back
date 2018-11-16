@@ -9,11 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author xiamu
+ */
 @Service
 public class BlogTypeSeriveImpl implements BlogTypeService {
 
+    private final BlogTypeMapper blogTypeMapper;
+
     @Autowired(required = false)
-    private BlogTypeMapper blogTypeMapper;
+    public BlogTypeSeriveImpl(BlogTypeMapper blogTypeMapper) {
+        this.blogTypeMapper = blogTypeMapper;
+    }
 
 
     @Override

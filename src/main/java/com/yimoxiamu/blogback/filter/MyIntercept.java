@@ -29,9 +29,10 @@ public class MyIntercept implements HandlerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(MyIntercept.class);
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         //跨域测试请求方法放行
-        if(request.getMethod().equals("OPTIONS")){
+        String options = "OPTIONS";
+        if(options.equals(request.getMethod())){
             return true;
         }
         String token = RequestContextHolderUtils.getAuthorizationToken();
@@ -45,18 +46,18 @@ public class MyIntercept implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
     }
 
 
 
-    public static void responseWriter(HttpServletResponse response, String jString){
+    private static void responseWriter(HttpServletResponse response, String jString){
         try{
             response.setContentType("application/json; charset=utf-8");
             response.getWriter().write(jString);

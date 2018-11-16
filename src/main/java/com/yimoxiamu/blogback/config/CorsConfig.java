@@ -26,12 +26,12 @@ public class CorsConfig {
     private  String WEB_ALLOW_URL;
 
 
-    public  CorsConfiguration buildCors(){
+    private  CorsConfiguration buildCors(){
         CorsConfiguration corsConfiguration=new CorsConfiguration();
         log.info(WEB_ALLOW_URL);
         String [] origins = WEB_ALLOW_URL.split(",");
-        for (int i = 0; i <origins.length; i++) {
-            corsConfiguration.addAllowedOrigin(origins[i]);
+        for (String origin : origins) {
+            corsConfiguration.addAllowedOrigin(origin);
         }
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedHeader("*");
@@ -44,8 +44,7 @@ public class CorsConfig {
     public CorsFilter corsFilter(){
         UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",buildCors());
-        CorsFilter corsFilter=new CorsFilter(source);
-        return corsFilter;
+        return new CorsFilter(source);
     }
 
 }
