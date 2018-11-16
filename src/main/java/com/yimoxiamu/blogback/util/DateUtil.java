@@ -76,19 +76,4 @@ public class DateUtil {
         return date;
     }
 
-    /**
-     * 判断是否需要更新wxToken
-     * @param dateStr
-     * @return
-     */
-    public static boolean countWxTokenNeedUpdate(String dateStr){
-        Date updateTime = String2Date(dateStr);
-        long second = (System.currentTimeMillis() - updateTime.getTime()) / 1000 / 60;
-        log.info("距离上次更新token已经过去"+second+"分钟");
-        if((int)second - 60 >= 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
 }

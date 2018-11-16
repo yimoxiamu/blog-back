@@ -46,7 +46,7 @@ public class LoginServiceImpl implements LoginService {
             return Result.error(CodeMsg.USER_IS_HAS);
         }else{
             userMapper.insertSelective(user);
-            return Result.success("注册成功！");
+            return Result.success("===================注册成功！===================");
         }
     }
 
@@ -79,14 +79,14 @@ public class LoginServiceImpl implements LoginService {
         try {
             javaMailSender.send(mailMessage);
             redisClient.setCacheValueForTime(Constant.REGIST_CHECK_EMAIL_HEAD+email,checkNum,3*60);
-            log.info("发送邮件成功！");
+            log.info("===================发送邮件成功！===================");
         }catch (Exception e){
             e.printStackTrace();
-            log.info("发送邮件出现错误");
+            log.info("===================发送邮件出现错误===================");
             throw new CustomGolbalException(CodeMsg.SEND_EMAIL_ERROR);
         }
 
-        return Result.success("验证码发送成功！");
+        return Result.success("===================验证码发送成功！===================");
     }
 
     @Override

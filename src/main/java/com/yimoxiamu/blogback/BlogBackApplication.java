@@ -3,9 +3,6 @@ package com.yimoxiamu.blogback;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.github.pagehelper.PageHelper;
-import org.apache.ibatis.plugin.Interceptor;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +13,6 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 
 /**
